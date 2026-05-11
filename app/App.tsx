@@ -1,19 +1,33 @@
 // import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { useState } from "react";
+import { Button, StyleSheet, Text, View } from "react-native";
 
 export default function App() {
+  const [name, setName] = useState<string>("GLab");
+  const [test, setTest] = useState({ name: "GLab", age: 42 });
+  const [count, setCount] = useState<number>(0);
   return (
     //jsx
     <View style={styles.container}>
       <View>
         <Text style={styles.parent}>
-          GLab<Text style={styles.child}>123</Text>
-        </Text>
+          GLab
+          <Text style={styles.child}>
+            {name}
+            {test.age}
+            {test.name}
+            {JSON.stringify(test)}
+          </Text>
+        </Text>{" "}
       </View>
       <Text style={styles.hello1}> Mobile App!</Text>
       <Text>React Native & Expo Go Mobile Framework!</Text>
-
       {/* <StatusBar style="auto" /> */}
+      <Text style={styles.child}>Count = {count}</Text>
+      <View>
+        {/* <Button title="Increase" onPress={() => alert("Press me")} /> */}
+        <Button title="Increase" onPress={() => setCount(count + 1)} />
+      </View>
     </View>
   );
 }
