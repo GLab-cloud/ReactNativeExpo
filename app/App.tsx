@@ -52,7 +52,7 @@ export default function App() {
                 setAge(0);
               } else {
                 const parsed = Number(value);
-                if (Number.isFinite(parsed)) setAge(parsed);
+                if (Number.isInteger(parsed) && parsed >= 0) setAge(parsed);
               }
             }}
             style={{
