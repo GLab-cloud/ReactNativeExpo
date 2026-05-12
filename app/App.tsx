@@ -26,7 +26,7 @@ export default function App() {
       <Text style={styles.child}>Count = {count}</Text>
       <View>
         {/* <Button title="Increase" onPress={() => alert("Press me")} /> */}
-        <Button title="Increase" onPress={() => setCount(count + 1)} />
+        <Button title="Increase" onPress={() => setCount(prev => prev + 1)} />
       </View>
     </View>
   );
