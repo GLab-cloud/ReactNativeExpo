@@ -47,7 +47,14 @@ export default function App() {
           <Text style={{ fontSize: 20, fontWeight: 200 }}>Age: {age}</Text>
           <TextInput
             // multiline
-            onChangeText={(value) => setAge(+value)}
+            onChangeText={(value) => {
+              if (value.trim() === "") {
+                setAge(0);
+              } else {
+                const parsed = Number(value);
+                if (Number.isFinite(parsed)) setAge(parsed);
+              }
+            }}
             style={{
               borderColor: "green",
               borderWidth: 1,
