@@ -1,6 +1,13 @@
 // import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import { Button, StyleSheet, Text, View, TextInput } from "react-native";
+import {
+  Button,
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  ScrollView,
+} from "react-native";
 
 export default function App() {
   // const [name, setName] = useState<string>("GLab");
@@ -12,6 +19,9 @@ export default function App() {
     { id: 1, name: "GLab", age: 18 },
     { id: 2, name: "GLab1", age: 19 },
     { id: 3, name: "GLab2", age: 20 },
+    { id: 4, name: "GLab3", age: 18 },
+    { id: 5, name: "GLab4", age: 19 },
+    { id: 6, name: "GLab5", age: 20 },
   ]);
 
   return (
@@ -19,7 +29,7 @@ export default function App() {
     <View style={styles.container}>
       <Text>Hello World</Text>
       <Text style={{ fontSize: 30 }}>array:</Text>
-      <View>
+      {/* <View>
         {students.map((item) => {
           return (
             <View
@@ -33,7 +43,23 @@ export default function App() {
           );
         })}
         )
-      </View>
+      </View> */}
+      <ScrollView>
+        {" "}
+        {students.map((item) => {
+          return (
+            <View
+              key={item.id}
+              style={{ padding: 30, backgroundColor: "blue", marginBottom: 20 }}
+            >
+              <Text>
+                {item.name} - {item.age}
+              </Text>
+            </View>
+          );
+        })}
+        )
+      </ScrollView>
     </View>
   );
 }
@@ -44,8 +70,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 50,
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    // alignItems: "center",
+    //  justifyContent: "center",
   },
   hello1: {
     color: "pink",
