@@ -8,63 +8,31 @@ export default function App() {
   const [count, setCount] = useState<number>(0);
   const [name, setName] = useState<string>("GLab");
   const [age, setAge] = useState<number>(0);
+  const [students, setStudent] = useState([
+    { id: 1, name: "GLab", age: 18 },
+    { id: 2, name: "GLab1", age: 19 },
+    { id: 3, name: "GLab2", age: 20 },
+  ]);
 
   return (
     //jsx
     <View style={styles.container}>
-      <Text style={styles.parent}>
-        GLab
-        <Text style={styles.child}>
-          {name}
-          {test.age}
-          {test.name}
-          {JSON.stringify(test)}
-        </Text>
-      </Text>{" "}
-      <Text style={styles.hello1}> Mobile App!</Text>
-      <Text>React Native & Expo Go Mobile Framework!</Text>
-      {/* <StatusBar style="auto" /> */}
-      <Text style={styles.child}>Count = {count}</Text>
+      <Text>Hello World</Text>
+      <Text style={{ fontSize: 30 }}>array:</Text>
       <View>
-        {/* <Button title="Increase" onPress={() => alert("Press me")} /> */}
-        <Button title="Increase" onPress={() => setCount((prev) => prev + 1)} />
-        <View>
-          <Text style={{ fontSize: 20, fontWeight: 200 }}>Name: {name}</Text>
-          <TextInput
-            // multiline
-            onChangeText={(value) => setName(value)}
-            style={{
-              borderColor: "green",
-              borderWidth: 1,
-              width: 200,
-              padding: 15,
-            }}
-            // autoCapitalize="characters"
-            autoCapitalize="words"
-          />
-        </View>
-        <View>
-          <Text style={{ fontSize: 20, fontWeight: 200 }}>Age: {age}</Text>
-          <TextInput
-            // multiline
-            onChangeText={(value) => {
-              if (value.trim() === "") {
-                setAge(0);
-              } else {
-                const parsed = Number(value);
-                if (Number.isInteger(parsed) && parsed >= 0) setAge(parsed);
-              }
-            }}
-            style={{
-              borderColor: "green",
-              borderWidth: 1,
-              width: 200,
-              padding: 15,
-            }}
-            keyboardType="numeric"
-            maxLength={2}
-          />
-        </View>
+        {students.map((item) => {
+          return (
+            <View
+              key={item.id}
+              style={{ padding: 30, backgroundColor: "pink", marginBottom: 20 }}
+            >
+              <Text>
+                {item.name} - {item.age}
+              </Text>
+            </View>
+          );
+        })}
+        )
       </View>
     </View>
   );
@@ -72,6 +40,8 @@ export default function App() {
 //not CSS - StyleSheet
 const styles = StyleSheet.create({
   container: {
+    paddingTop: 20,
+    paddingHorizontal: 50,
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
