@@ -54,7 +54,7 @@ export default function App() {
     //jsx
     <View style={styles.container}>
       //jsx
-      <Text>FlatList</Text>
+      <Text style={{ fontSize: 30, paddingTop: 20 }}>FlatList</Text>
       <FlatList
         data={students}
         renderItem={({ item }) => (
