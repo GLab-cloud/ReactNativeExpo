@@ -31,12 +31,13 @@ export default function App() {
 
   const styles = StyleSheet.create({
     container: {
-      paddingTop: 20,
-      paddingHorizontal: 50,
+      paddingTop: 50,
+      paddingHorizontal: 20,
       flex: 1,
       backgroundColor: "#fff",
       // alignItems: "center",
       //  justifyContent: "center",
+      textAlign: "center",
     },
     hello1: {
       color: "pink",
@@ -45,7 +46,14 @@ export default function App() {
       borderColor: "green",
       padding: 5,
     },
-    header: { fontSize: 30, fontWeight: "700" },
+    header: {
+      fontWeight: "700",
+      backgroundColor: "orange",
+      // alignItems: "center",
+      //  justifyContent: "center",
+      textAlign: "center",
+      fontSize: 40,
+    },
     parent: { fontSize: 30, color: "red" },
     child: { fontSize: 20, color: "pink" },
   });
@@ -53,18 +61,7 @@ export default function App() {
   return (
     //jsx
     <View style={styles.container}>
-      //jsx
-      <Text style={{ fontSize: 30, paddingTop: 20 }}>FlatList</Text>
-      <FlatList
-        data={students}
-        renderItem={({ item }) => (
-          <View
-            style={{ padding: 30, backgroundColor: "blue", marginBottom: 30 }}
-          >
-            <Text>{item.name}</Text>
-          </View>
-        )}
-      />
+      <Text style={styles.header}>ToDo App</Text>
     </View>
   );
 }
