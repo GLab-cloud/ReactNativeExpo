@@ -1,5 +1,5 @@
 // import { StatusBar } from "expo-status-bar";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import {
   Button,
   StyleSheet,
@@ -11,35 +11,46 @@ import {
   TextInput,
 } from "react-native";
 
+interface ITodo {
+  id: number;
+  name: string;
+}
+
 export default function App() {
-  // const [name, setName] = useState<string>("GLab");
-  // const [test, setTest] = useState({ name: "GLab", age: 42 });
-  // const [count, setCount] = useState<number>(0);
-  // const [name, setName] = useState<string>("GLab");
-  // const [age, setAge] = useState<number>(0);
-  const [students, setStudents] = useState([
-    { id: 1, name: "GLab", age: 18 },
-    { id: 2, name: "GLab1", age: 19 },
-    { id: 3, name: "GLab2", age: 20 },
-    { id: 4, name: "GLab3", age: 18 },
-    { id: 5, name: "GLab4", age: 19 },
-    { id: 6, name: "GLab5", age: 20 },
-    { id: 7, name: "GLab3", age: 18 },
-    { id: 8, name: "GLab4", age: 19 },
-    { id: 9, name: "GLab5", age: 20 },
-  ]);
+  const [toDo, setTodo] = useState("");
+  const [listTodo, setListTodo] = useState<ITodo[]>([]);
+  const nextIdRef = useRef(1);
+  const handleAddTodo = () => {
+    const trimmed = toDo.trim();
+    if (!trimmed) {
+      alert("Empty To-do");
+      return;
+    }
+    setListTodo(prev => [...prev, { id: nextIdRef.current++, name: trimmed }]);
+    setTodo("");
+  };
   return (
     //jsx
     <View style={styles.container}>
       <Text style={styles.header}>ToDo App</Text>
       {/* form */}
       <View>
-        <TextInput style={styles.todoInput} />
-        <Button title="ADD TODO" />
+        <TextInput
+          value={toDo}
+          style={styles.todoInput}
+          onChangeText={(value) => setTodo(value)}
+        />
+        <Button title="ADD TODO" onPress={handleAddTodo} />
       </View>
       {/* List Todo */}
-      <View>
-        <Text>List ToDo</Text>
+      <View style={styles.body}>
+        <FlatList
+          data={listTodo}
+          keyExtractor={(item) => item.id + ""}
+          renderItem={({ item }) => {
+            return <Text style={styles.todoItem}>{item.name}</Text>;
+          }}
+        />
       </View>
     </View>
   );
@@ -73,10 +84,19 @@ const styles = StyleSheet.create({
   },
   parent: { fontSize: 30, color: "red" },
   child: { fontSize: 20, color: "pink" },
+  addTodoBtn: { paddingBottom: 15 },
   todoInput: {
     borderBottomColor: "green",
     borderBottomWidth: 1,
     padding: 5,
     margin: 15,
+  },
+  body: { paddingHorizontal: 10, marginBottom: 20 },
+  todoItem: {
+    borderWidth: 2,
+    borderStyle: "dashed",
+    fontSize: 20,
+    padding: 10,
+    marginTop: 20,
   },
 });

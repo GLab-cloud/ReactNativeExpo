@@ -61,8 +61,8 @@ describe('FlatList Integration Tests', () => {
 
   describe('Empty State', () => {
     it('should render gracefully with empty data', () => {
-      const { container } = render(<TestComponent data={[]} />);
-      expect(container).toBeTruthy();
+      const { root } = render(<TestComponent data={[]} />);
+      expect(root).toBeTruthy();
     });
   });
 });
