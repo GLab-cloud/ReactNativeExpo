@@ -1,5 +1,5 @@
 // import { StatusBar } from "expo-status-bar";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import {
   Button,
   StyleSheet,
@@ -15,17 +15,18 @@ interface ITodo {
   id: number;
   name: string;
 }
-let nextId = 1;
 
 export default function App() {
   const [toDo, setTodo] = useState("");
   const [listTodo, setListTodo] = useState<ITodo[]>([]);
+  const nextIdRef = useRef(1);
   const handleAddTodo = () => {
-    if (!toDo) {
+    const trimmed = toDo.trim();
+    if (!trimmed) {
       alert("Empty To-do");
       return;
     }
-    setListTodo([...listTodo, { id: nextId++, name: toDo }]);
+    setListTodo(prev => [...prev, { id: nextIdRef.current++, name: trimmed }]);
     setTodo("");
   };
   return (
