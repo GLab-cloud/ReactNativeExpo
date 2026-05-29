@@ -15,18 +15,17 @@ interface ITodo {
   id: number;
   name: string;
 }
+let nextId = 1;
+
 export default function App() {
   const [toDo, setTodo] = useState("");
   const [listTodo, setListTodo] = useState<ITodo[]>([]);
-  function randomInterger(min: number, max: number) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
   const handleAddTodo = () => {
     if (!toDo) {
       alert("Empty To-do");
       return;
     }
-    setListTodo([...listTodo, { id: randomInterger(2, 2000000), name: toDo }]);
+    setListTodo([...listTodo, { id: nextId++, name: toDo }]);
     setTodo("");
   };
   return (
