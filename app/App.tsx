@@ -9,6 +9,8 @@ import {
   ScrollView,
   FlatList,
   TextInput,
+  TouchableOpacity,
+  Pressable,
 } from "react-native";
 
 interface ITodo {
@@ -26,8 +28,15 @@ export default function App() {
       alert("Empty To-do");
       return;
     }
-    setListTodo(prev => [...prev, { id: nextIdRef.current++, name: trimmed }]);
+    setListTodo((prev) => [
+      ...prev,
+      { id: nextIdRef.current++, name: trimmed },
+    ]);
     setTodo("");
+  };
+  const deleteTodo = (id: number) => {
+    const newTodos = listTodo.filter((item) => item.id != id);
+    setListTodo(newTodos);
   };
   return (
     //jsx
@@ -48,7 +57,17 @@ export default function App() {
           data={listTodo}
           keyExtractor={(item) => item.id + ""}
           renderItem={({ item }) => {
-            return <Text style={styles.todoItem}>{item.name}</Text>;
+            return (
+              // <TouchableOpacity onPress={() => deleteTodo(item.id)}>
+              //   <Text style={styles.todoItem}>{item.name}</Text>
+              // </TouchableOpacity>
+              <Pressable
+                onPress={() => deleteTodo(item.id)}
+                style={({ pressed }) => ({ opacity: pressed ? 0.5 : 1 })}
+              >
+                <Text style={styles.todoItem}>{item.name}</Text>
+              </Pressable>
+            );
           }}
         />
       </View>
