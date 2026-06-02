@@ -3,7 +3,7 @@ module.exports = {
   testEnvironment: 'node',
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   transformIgnorePatterns: [
-    'node_modules/(?!(expo|expo-modules-core|react-native|@react-native|@expo|@react-navigation)/)',
+    'node_modules/(?!(expo|expo-font|expo-modules-core|react-native|@react-native|@expo|@react-navigation)/)',
   ],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/$1',

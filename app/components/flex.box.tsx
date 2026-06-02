@@ -4,12 +4,12 @@ const styles = StyleSheet.create({
     marginTop: 40,
     marginBottom: 60,
     flexDirection: "row",
-    justifyContent: "flex-start",
+    justifyContent: "center",
     alignItems: "center",
     borderWidth: 2,
     borderColor: "red",
     alignContent: "space-between",
-    flex: 1,
+    // flex: 1,
   },
   title: {
     fontSize: 20,
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     backgroundColor: "red",
     padding: 10,
     width: 50,
-    flex: 1,
+    // flex: 1,
   },
   title2: {
     fontSize: 20,
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     padding: 10,
     width: 50,
     height: 300,
-    flex: 1,
+    flex: 2,
   },
   title3: {
     fontSize: 20,
