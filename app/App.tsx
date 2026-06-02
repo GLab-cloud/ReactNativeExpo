@@ -15,7 +15,8 @@ import {
   Alert,
   TouchableWithoutFeedback,
 } from "react-native";
-import FlexBox from "./components/flex.box";
+// import FlexBox from "./components/flex.box";
+import { AntDesign } from "@expo/vector-icons";
 
 interface ITodo {
   id: number;
@@ -30,7 +31,7 @@ export default function App() {
     const trimmed = toDo.trim();
     if (!trimmed) {
       // alert("Empty To-do");
-      Alert.alert("input to do Error", "Cannot leave empty todo!!!", [
+      Alert.alert("Error: input to-do ", "Cannot leave empty todo!!!", [
         { text: "Ok", onPress: () => console.log("OK pressed") },
       ]);
       return;
@@ -42,8 +43,8 @@ export default function App() {
     setTodo("");
   };
   const deleteTodo = (id: number) => {
-    const newTodos = listTodo.filter((item) => item.id != id);
-    setListTodo(newTodos);
+    // const newTodos = listTodo.filter((item) => item.id != id);
+    // setListTodo(newTodos);
   };
   return (
     //jsx
@@ -53,41 +54,44 @@ export default function App() {
         Keyboard.dismiss();
       }}
     >
-      <View style={{ flex: 1 }}>
-        <View style={styles.container}>
-          <Text style={styles.header}>ToDo App</Text>
-          {/* form */}
-          <View>
-            <TextInput
-              value={toDo}
-              style={styles.todoInput}
-              onChangeText={(value) => setTodo(value)}
-            />
-            <Button title="ADD TODO" onPress={handleAddTodo} />
-          </View>
-          {/* List Todo */}
-          <View style={styles.body}>
-            <FlatList
-              data={listTodo}
-              keyExtractor={(item) => item.id + ""}
-              renderItem={({ item }) => {
-                return (
-                  // <TouchableOpacity onPress={() => deleteTodo(item.id)}>
-                  //   <Text style={styles.todoItem}>{item.name}</Text>
-                  // </TouchableOpacity>
-                  <Pressable
-                    onPress={() => deleteTodo(item.id)}
-                    style={({ pressed }) => ({ opacity: pressed ? 0.5 : 1 })}
-                  >
-                    <Text style={styles.todoItem}>{item.name}</Text>
-                  </Pressable>
-                );
-              }}
-            />
-          </View>
+      {/* <View style={{ flex: 1 }}> */}
+      <View style={styles.container}>
+        <Text style={styles.header}>ToDo App</Text>
+        {/* form */}
+        <View style={styles.form}>
+          <TextInput
+            value={toDo}
+            style={styles.todoInput}
+            onChangeText={(value) => setTodo(value)}
+          />
+          <Button title="ADD TODO" onPress={handleAddTodo} />
         </View>
-        <FlexBox />
+        {/* List Todo */}
+        <View style={styles.todo}>
+          <FlatList
+            data={listTodo}
+            keyExtractor={(item) => item.id + ""}
+            renderItem={({ item }) => {
+              return (
+                // <TouchableOpacity onPress={() => deleteTodo(item.id)}>
+                //   <Text style={styles.todoItem}>{item.name}</Text>
+                // </TouchableOpacity>
+                <Pressable
+                  onPress={() => deleteTodo(item.id)}
+                  style={({ pressed }) => ({ opacity: pressed ? 0.5 : 1 })}
+                >
+                  <View style={styles.groupTodo}>
+                    <Text style={styles.todoItem}>{item.name}</Text>
+                    <AntDesign name="close" size={24} color="black" />
+                  </View>
+                </Pressable>
+              );
+            }}
+          />
+        </View>
       </View>
+      {/* <FlexBox /> */}
+      {/* </View> */}
     </TouchableWithoutFeedback>
   );
 }
@@ -117,6 +121,7 @@ const styles = StyleSheet.create({
     //  justifyContent: "center",
     textAlign: "center",
     fontSize: 40,
+    // flex: 1,
   },
   parent: { fontSize: 30, color: "red" },
   child: { fontSize: 20, color: "pink" },
@@ -127,12 +132,20 @@ const styles = StyleSheet.create({
     padding: 5,
     margin: 15,
   },
-  body: { paddingHorizontal: 10, marginBottom: 20 },
+  form: {},
+  todo: { paddingHorizontal: 10, marginBottom: 20, flex: 8 },
   todoItem: {
+    fontSize: 20,
+    // marginTop: 20,
+  },
+  groupTodo: {
+    padding: 10,
+    flexDirection: "row",
+    alignItems: "center",
     borderWidth: 2,
     borderStyle: "dashed",
-    fontSize: 20,
-    padding: 10,
-    marginTop: 20,
+    marginBottom: 15,
+    marginHorizontal: 10,
+    justifyContent: "space-between",
   },
 });
