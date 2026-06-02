@@ -30,7 +30,7 @@ export default function App() {
     const trimmed = toDo.trim();
     if (!trimmed) {
       // alert("Empty To-do");
-      Alert.alert("input to do Error", "Cannot leave empty todo!!!", [
+      Alert.alert("Error: input to-do ", "Cannot leave empty todo!!!", [
         { text: "Ok", onPress: () => console.log("OK pressed") },
       ]);
       return;
